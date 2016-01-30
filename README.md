@@ -1,70 +1,21 @@
 ==================================================================
-Human Activity Recognition Using Smartphones Dataset
-Version 1.0
-==================================================================
-Jorge L. Reyes-Ortiz, Davide Anguita, Alessandro Ghio, Luca Oneto.
-Smartlab - Non Linear Complex Systems Laboratory
-DITEN - Università degli Studi di Genova.
-Via Opera Pia 11A, I-16145, Genoa, Italy.
-activityrecognition@smartlab.ws
-www.smartlab.ws
+Getting and cleaning data course project
 ==================================================================
 
-The experiments have been carried out with a group of 30 volunteers within an age bracket of 19-48 years. Each person performed six activities (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) wearing a smartphone (Samsung Galaxy S II) on the waist. Using its embedded accelerometer and gyroscope, we captured 3-axial linear acceleration and 3-axial angular velocity at a constant rate of 50Hz. The experiments have been video-recorded to label the data manually. The obtained dataset has been randomly partitioned into two sets, where 70% of the volunteers was selected for generating the training data and 30% the test data. 
+Purpose
+-------
 
-The sensor signals (accelerometer and gyroscope) were pre-processed by applying noise filters and then sampled in fixed-width sliding windows of 2.56 sec and 50% overlap (128 readings/window). The sensor acceleration signal, which has gravitational and body motion components, was separated using a Butterworth low-pass filter into body acceleration and gravity. The gravitational force is assumed to have only low frequency components, therefore a filter with 0.3 Hz cutoff frequency was used. From each window, a vector of features was obtained by calculating variables from the time and frequency domain. See 'features_info.txt' for more details. 
+The R script run_analysis.R was created with the purpose of obtaining the Coursera certificate on 'Getting and Cleaning Data'. In broad terms the script aims at creating a tidy dataset, as described in the lecture video's, of the given data. These data consisted of 6 datastes, 3 related to the train set and 3 related to the test set. Apart from making the data tidy, the script also performs some other analysis, as required by the assignment. It for example also extract all the variable names of the tidy dataset that contain the word 'mean' or 'stddev'. Further also another dataset was extracted from the first created dataset.
 
-For each record it is provided:
-======================================
+script set-up
+--------------
 
-- Triaxial acceleration from the accelerometer (total acceleration) and the estimated body acceleration.
-- Triaxial Angular velocity from the gyroscope. 
-- A 561-feature vector with time and frequency domain variables. 
-- Its activity label. 
-- An identifier of the subject who carried out the experiment.
+The script is divided into 5 subparts. Each corresponding to a certain part of the assigment:
 
-The dataset includes the following files:
-=========================================
+1. Merge the test and train set: in this part  the 6 datasets are imported and merged together to obtain the merged dataset called 'dat'. Also it give appropriate label names there were necessary.
+2. Extract only the measurements and mean and standard deviation for each measurement. This part extracts all columns for the dataset 'dat' that have information on the mean or standard deviation of a certain measure. This information is stored in a dataset called 'MeanStd'
+3. Use descriptive label names: The values for the column 'activity', describing what kind of activity the observed person was undertaking are labeled with numbers from 1 to 6. As this is not informative these values are replaced with more informative labels like 'WALKING', 'WALKING_UPSTAIRS', etc.
+4. Appropriately label dataset names: Here the label names are made more clear such that they only contain letters, numbers and dots.
+5. Create second independently dataset. This part creates out of the dataset 'dat' a new tidy dataset with information on the mean of each activity, grouped per subject and activity.
 
-- 'README.txt'
-
-- 'features_info.txt': Shows information about the variables used on the feature vector.
-
-- 'features.txt': List of all features.
-
-- 'activity_labels.txt': Links the class labels with their activity name.
-
-- 'train/X_train.txt': Training set.
-
-- 'train/y_train.txt': Training labels.
-
-- 'test/X_test.txt': Test set.
-
-- 'test/y_test.txt': Test labels.
-
-The following files are available for the train and test data. Their descriptions are equivalent. 
-
-- 'train/subject_train.txt': Each row identifies the subject who performed the activity for each window sample. Its range is from 1 to 30. 
-
-- 'train/Inertial Signals/total_acc_x_train.txt': The acceleration signal from the smartphone accelerometer X axis in standard gravity units 'g'. Every row shows a 128 element vector. The same description applies for the 'total_acc_x_train.txt' and 'total_acc_z_train.txt' files for the Y and Z axis. 
-
-- 'train/Inertial Signals/body_acc_x_train.txt': The body acceleration signal obtained by subtracting the gravity from the total acceleration. 
-
-- 'train/Inertial Signals/body_gyro_x_train.txt': The angular velocity vector measured by the gyroscope for each window sample. The units are radians/second. 
-
-Notes: 
-======
-- Features are normalized and bounded within [-1,1].
-- Each feature vector is a row on the text file.
-
-For more information about this dataset contact: activityrecognition@smartlab.ws
-
-License:
-========
-Use of this dataset in publications must be acknowledged by referencing the following publication [1] 
-
-[1] Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L. Reyes-Ortiz. Human Activity Recognition on Smartphones using a Multiclass Hardware-Friendly Support Vector Machine. International Workshop of Ambient Assisted Living (IWAAL 2012). Vitoria-Gasteiz, Spain. Dec 2012
-
-This dataset is distributed AS-IS and no responsibility implied or explicit can be addressed to the authors or their institutions for its use or misuse. Any commercial use is prohibited.
-
-Jorge L. Reyes-Ortiz, Alessandro Ghio, Luca Oneto, Davide Anguita. November 2012.
+Note that for running this script the library 'plyr' has to be installed first.
