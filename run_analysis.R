@@ -63,9 +63,13 @@ colnames(dat) <- substring(colnames(dat), 1, nchar(colnames(dat))-1) #drop "." a
 
 #Use ddply
 
-NewDat <- ddply(dat, .(subjec, activit), function(x) apply(x, 2, mean))
+NewDat <- ddply(dat, .(subjec, activit), function(x) colMeans(x[3:563]))
 
 #Use more interpretable variable names
 
 colnames(NewDat)[3:ncol(NewDat)] <- paste0("(",colnames(NewDat)[3:ncol(NewDat)],")")
 colnames(NewDat)[3:ncol(NewDat)] <- paste0("AVG", colnames(NewDat)[3:ncol(NewDat)] )
+
+#Create table in .txt format
+
+write.table(NewDat, file="NewDat.txt", row.names=F)
